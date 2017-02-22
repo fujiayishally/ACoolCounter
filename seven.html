@@ -1,0 +1,67 @@
+<!DOCTYPE html
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Canvas 绘制七巧板</title>
+	</head>
+	<body>
+		
+		<canvas id="canvas" style=" margin: 20px auto; display: block;"></canvas>
+		
+		<script>
+			
+			var canvas = document.getElementById('canvas');
+				canvas.width = '400';
+				canvas.height = '400';
+				
+			if(canvas.getContext('2d')){
+				
+				var ctx = canvas.getContext('2d');
+				var pos = [
+					{p:[{x:0,y:0},{x:0,y:400},{x:200,y:200}],color:'#65bece'},
+					{p:[{x:0,y:0},{x:400,y:0},{x:200,y:200}],color:'#cdfe67'},
+					{p:[{x:0,y:400},{x:100,y:300},{x:200,y:400}],color:'#f68ecd'},
+					{p:[{x:100,y:300},{x:200,y:200},{x:300,y:300},{x:200,y:400}],color:'#a693c3'},
+					{p:[{x:200,y:200},{x:300,y:100},{x:300,y:300}],color:'#f9f61b'},
+					{p:[{x:300,y:100},{x:300,y:300},{x:400,y:200},{x:400,y:0}],color:'#f03d63'},
+					{p:[{x:200,y:400},{x:400,y:200},{x:400,y:400}],color:'#f6ca27'} 
+				];
+				
+				
+				for(var i = 0; i< pos.length; i++){
+					
+					
+					ctx.beginPath();
+					
+					var item = pos[i];
+					
+					for(var j = 0; j < item.p.length; j++){
+						
+						var next = j+1;
+						
+						next = next >= item.p.length ? 0 : next;
+						
+						if(j === 0){
+							ctx.moveTo(item.p[j].x,item.p[j].y);
+						}
+						ctx.lineTo(item.p[next].x,item.p[next].y)
+					}
+					ctx.closePath();
+
+					ctx.fillStyle = item.color;
+					ctx.fill();
+					
+					ctx.strokeStyle = item.color;
+					ctx.stroke();
+				}
+				ctx.beginPath();
+			        
+				
+				
+				
+			}else{
+				alert('不支持canvas')
+			}
+		</script>
+	</body>
+</html>
